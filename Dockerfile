@@ -3,7 +3,7 @@
 # $ docker build -t ansible --build-arg LUSER=user .
 # HowTo Run
 # $ docker run -v /home/user/.ssh:/home/user/.ssh -it ansible 
-FROM centos:7
+FROM ubuntu:20.04
 
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
@@ -16,14 +16,14 @@ RUN useradd -m $LUSER
 RUN mkdir -p /home/$LUSER/.ssh
 RUN chown -R $LUSER:$LUSER /home/$LUSER/.ssh
 
-RUN yum check-update; \
-    yum install -y bind-utils; \
-    yum install -y gcc libffi-devel python3 epel-release; \
-    yum install -y netcat; \
-    yum install -y openssh-clients; \
-    yum install -y python3-pip; \
-    yum install -y wget; \
-    yum clean all
+RUN apt update; \
+    apt install -y bind-utils; \
+    apt install -y gcc libffi-devel python3 epel-release; \
+    apt install -y netcat; \
+    apt install -y openssh-clients; \
+    apt install -y python3-pip; \
+    apt install -y wget; \
+    apt-get clean
 
 RUN pip3 install --upgrade pip; \
     pip3 install --upgrade virtualenv; \
